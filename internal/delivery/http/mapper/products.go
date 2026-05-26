@@ -3,10 +3,10 @@ package mapper
 import (
 	"fmt"
 	"di-golang/internal/delivery/http/dto"
-	"di-golang/internal/domain"
+	"di-golang/internal/models"
 )
 
-func ToProductResponseList(products []domain.Product) []dto.ProductResponse {
+func ToProductResponseList(products []models.Product) []dto.ProductResponse {
 	fmt.Println(products)
 	response := make([]dto.ProductResponse , len(products))
 	for i, p := range products {

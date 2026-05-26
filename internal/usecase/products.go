@@ -1,9 +1,9 @@
 package usecase
 
-import "di-golang/internal/domain"
+import "di-golang/internal/models"
 
 type ProductUseCase interface {
-	GetAll() []domain.Product
+	GetAll() []models.Product
 }
 
 
@@ -13,8 +13,8 @@ func NewProductUseCase() ProductUseCase {
 	return &productUseCase{}
 }
 
-func (p *productUseCase) GetAll() []domain.Product {
-	return []domain.Product{
+func (p *productUseCase) GetAll() []models.Product {
+	return []models.Product{
 		{ID: 1, Name: "Product A", Price: 10.5},
 		{ID: 2, Name: "Product B", Price: 20.0},
 	}
