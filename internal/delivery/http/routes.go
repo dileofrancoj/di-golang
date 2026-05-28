@@ -10,6 +10,7 @@ func SetupRouter(h *handlers.Handler) *gin.Engine {
 
 	r.GET("/ping", h.Ping)
 	r.GET("/products", h.GetProducts)
+	r.GET("/products/:id", h.GetProduct)
 	r.GET("/users", h.GetUsers)
 
 	return r

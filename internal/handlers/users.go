@@ -9,7 +9,11 @@ import (
 )
 
 func (h *Handler) GetUsers(c *gin.Context) {
-	users := h.userUC.GetAll()
+	users, err := h.userUC.GetAll()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 	response := mapper.ToUserResponseList(users)
 	c.JSON(http.StatusOK, response)
 }

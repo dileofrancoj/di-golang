@@ -1,21 +1,22 @@
 package usecase
 
-import "di-golang/internal/models"
-
+import (
+	"di-golang/internal/models"
+	"di-golang/internal/repository"
+)
 
 type UserUseCase interface {
-	GetAll() []models.User
+	GetAll() ([]models.User, error)
 }
 
-type userUseCase struct{}
-
-func NewUserUseCase() UserUseCase {
-	return &userUseCase{}
+type userUseCase struct {
+	repo repository.UserRepository
 }
 
-func (u *userUseCase) GetAll() []models.User {
-	return []models.User{
-		{ID: 1, Name: "User One", Email: "user1@example.com"},
-		{ID: 2, Name: "User Two", Email: "user2@example.com"},
-	}
+func NewUserUseCase(repo repository.UserRepository) UserUseCase {
+	return &userUseCase{repo: repo}
+}
+
+func (u *userUseCase) GetAll() ([]models.User, error) {
+	return u.repo.GetAll()
 }

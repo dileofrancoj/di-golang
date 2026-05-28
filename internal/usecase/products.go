@@ -1,21 +1,27 @@
 package usecase
 
-import "di-golang/internal/models"
+import (
+	"di-golang/internal/models"
+	"di-golang/internal/repository"
+)
 
 type ProductUseCase interface {
-	GetAll() []models.Product
+	GetAll() ([]models.Product, error)
+	GetProduct(id int) (*models.Product, error)
 }
 
-
-type productUseCase struct{}
-
-func NewProductUseCase() ProductUseCase {
-	return &productUseCase{}
+type productUseCase struct {
+	repo repository.ProductRepository
 }
 
-func (p *productUseCase) GetAll() []models.Product {
-	return []models.Product{
-		{ID: 1, Name: "Product A", Price: 10.5},
-		{ID: 2, Name: "Product B", Price: 20.0},
-	}
+func NewProductUseCase(repo repository.ProductRepository) ProductUseCase {
+	return &productUseCase{repo: repo}
+}
+
+func (p *productUseCase) GetProduct(id int) (*models.Product, error) {
+	return p.repo.GetByID(id)
+}
+
+func (p *productUseCase) GetAll() ([]models.Product, error) {
+	return p.repo.GetAll()
 }

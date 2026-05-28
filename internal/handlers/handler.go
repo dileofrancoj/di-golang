@@ -1,9 +1,7 @@
 package handlers
 
 import (
-
 	"di-golang/internal/usecase"
-
 )
 
 type Handler struct {
